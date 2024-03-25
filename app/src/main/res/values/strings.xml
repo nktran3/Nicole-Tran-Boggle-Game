@@ -8,5 +8,9 @@
     <string name="score">SCORE:</string>
     <string name="score_number"><u>0</u></string>
     <string name="new_game">NEW GAME</string>
+    <string name="less_than_four">The word must be at least 4 chars long, -10</string>
+    <string name="two_vowels">The word must contain at least two vowels, -10</string>
+    <string name="correct">That\'s correct</string>
+    <string name="incorrect">That\'s incorrect</string>
 
 </resources>

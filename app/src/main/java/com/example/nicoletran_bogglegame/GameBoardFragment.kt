@@ -1,5 +1,6 @@
 package com.example.nicoletran_bogglegame
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.*
@@ -29,10 +30,40 @@ class GameBoardFragment : Fragment() {
         setupGameBoard()
         displayWord = view.findViewById(R.id.display_word)
         clearButton = view.findViewById(R.id.clear_button)
+        submitButton = view.findViewById(R.id.submit_button)
 
         clearButton.setOnClickListener {
             selectedLetters.clear()
             displayWord.text = ""
+        }
+
+        submitButton.setOnClickListener{
+            val word = selectedLetters.toString()
+            val vowels = "AEIOU"
+            var vowelCount = 0
+            var atleast2Vowels = false
+            for (char in word) {
+                if (char in vowels){
+                    vowelCount++
+                }
+                if (vowelCount >= 2){
+                    atleast2Vowels = true
+                }
+            }
+            if (word.length < 4){
+                Toast.makeText(requireContext(), R.string.less_than_four, Toast.LENGTH_SHORT).show()
+            } else{
+                if (!atleast2Vowels){
+                    Toast.makeText(requireContext(), R.string.two_vowels, Toast.LENGTH_SHORT).show()
+                } else {
+                    if (isWordInDictionary(word)){
+                        Toast.makeText(requireContext(), R.string.correct, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), R.string.incorrect, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
         }
     }
 
@@ -53,5 +84,15 @@ class GameBoardFragment : Fragment() {
         }
     }
 
+    private fun isWordInDictionary(word:String): Boolean {
+        requireContext().assets.open("words.txt").bufferedReader().useLines { lines ->
+            lines.forEach { line ->
+                if (word.equals(line, ignoreCase = true)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
 }
