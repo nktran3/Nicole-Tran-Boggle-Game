@@ -2,31 +2,18 @@ package com.example.nicoletran_bogglegame
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameBoardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameBoardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val selectedLetters = StringBuilder()
+    private lateinit var displayWord: TextView
+    private lateinit var clearButton: Button
+    private lateinit var submitButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -37,23 +24,34 @@ class GameBoardFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_game_board, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GameBoardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GameBoardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupGameBoard()
+        displayWord = view.findViewById(R.id.display_word)
+        clearButton = view.findViewById(R.id.clear_button)
+
+        clearButton.setOnClickListener {
+            selectedLetters.clear()
+            displayWord.text = ""
+        }
+    }
+
+    private fun setupGameBoard() {
+        val letters = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
+        val random = java.util.Random()
+        for (i in 1..16) {
+            val buttonId = resources.getIdentifier("button$i", "id", context?.packageName)
+            val button = view?.findViewById<Button>(buttonId)
+            button?.let {
+                val letter = letters[random.nextInt(letters.size)].toString()
+                it.text = letter
+                it.setOnClickListener {
+                    selectedLetters.append(letter)
+                    displayWord.text = selectedLetters.toString()
                 }
             }
+        }
     }
+
+
 }
