@@ -136,9 +136,10 @@ class GameBoardFragment : Fragment() {
 
      fun resetGame() {
         selectedLetters.clear()
+        usedWords.clear()
         displayWord.text = ""
         totalScore = 0
-        gameCommunication?.updateScore(totalScore)  // Reset and update the score display
+        gameCommunication?.updateScore(totalScore)
         setupGameBoard()
     }
 
