@@ -127,8 +127,15 @@ class GameBoardFragment : Fragment() {
         if (containsConstants){
             score += score
         }
-
         return score
+    }
+
+     fun resetGame() {
+        selectedLetters.clear()
+        displayWord.text = ""
+        totalScore = 0
+        gameCommunication?.updateScore(totalScore)  // Reset and update the score display
+        setupGameBoard()
     }
 
 }

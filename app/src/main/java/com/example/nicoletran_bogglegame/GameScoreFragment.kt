@@ -7,6 +7,8 @@ import android.widget.*
 
 class GameScoreFragment : Fragment() {
     private lateinit var scoreTextView: TextView
+    private lateinit var newGameButton: Button
+    private lateinit var gameCommunication: GameCommunication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -17,12 +19,20 @@ class GameScoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_score, container, false)
+        val view = inflater.inflate(R.layout.fragment_game_score, container, false)
+        gameCommunication = activity as GameCommunication
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         scoreTextView = view.findViewById(R.id.score_number)
+        newGameButton = view.findViewById(R.id.new_game_button)
+
+        newGameButton.setOnClickListener{
+            gameCommunication.resetGame()
+        }
+
     }
 
     fun displayScore(score: Int) {
