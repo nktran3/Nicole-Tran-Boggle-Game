@@ -1,6 +1,5 @@
 package com.example.nicoletran_bogglegame
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.*
@@ -12,6 +11,8 @@ class GameBoardFragment : Fragment() {
     private lateinit var displayWord: TextView
     private lateinit var clearButton: Button
     private lateinit var submitButton: Button
+    private lateinit var gameCommunication: GameCommunication
+    private var totalScore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,9 @@ class GameBoardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_board, container, false)
+        val view =  inflater.inflate(R.layout.fragment_game_board, container, false)
+        gameCommunication = activity as GameCommunication
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,9 +60,19 @@ class GameBoardFragment : Fragment() {
                     Toast.makeText(requireContext(), R.string.two_vowels, Toast.LENGTH_SHORT).show()
                 } else {
                     if (isWordInDictionary(word)){
-                        Toast.makeText(requireContext(), R.string.correct, Toast.LENGTH_SHORT).show()
+                        val score = calculateScore(word)
+                        totalScore += score
+                        gameCommunication.updateScore(totalScore)
+                        Toast.makeText(requireContext(), getString(R.string.correct) + ", +$score", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(requireContext(), R.string.incorrect, Toast.LENGTH_SHORT).show()
+                        val score = -10
+                        if (totalScore < 10){
+                            totalScore = 0
+                        } else {
+                            totalScore += score
+                        }
+                        gameCommunication.updateScore(totalScore)
+                        Toast.makeText(requireContext(), getString(R.string.incorrect) + ", $score", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -93,6 +106,29 @@ class GameBoardFragment : Fragment() {
             }
         }
         return false
+    }
+
+    private fun calculateScore(word: String): Int {
+        var score = 0
+        val vowels = "AEIOU"
+        val consonants = "SZPXQ"
+        var containsConstants = false
+        for (char in word){
+            if (char in vowels){
+                score += 5
+            } else if (char in consonants){
+                score += 1
+                containsConstants = true
+            } else {
+                score += 1
+            }
+        }
+
+        if (containsConstants){
+            score += score
+        }
+
+        return score
     }
 
 }
