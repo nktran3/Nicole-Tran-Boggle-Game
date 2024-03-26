@@ -8,6 +8,7 @@ import android.widget.*
 
 class GameBoardFragment : Fragment() {
     private val selectedLetters = StringBuilder()
+    private val usedWords = mutableSetOf<String>()
     private lateinit var displayWord: TextView
     private lateinit var clearButton: Button
     private lateinit var submitButton: Button
@@ -58,8 +59,11 @@ class GameBoardFragment : Fragment() {
             } else{
                 if (!atleast2Vowels){
                     Toast.makeText(requireContext(), R.string.two_vowels, Toast.LENGTH_SHORT).show()
+                } else if (word in usedWords){
+                    Toast.makeText(requireContext(), R.string.used, Toast.LENGTH_SHORT).show()
                 } else {
                     if (isWordInDictionary(word)){
+                        usedWords.add(word)
                         val score = calculateScore(word)
                         totalScore += score
                         gameCommunication.updateScore(totalScore)

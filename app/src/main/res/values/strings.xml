@@ -12,5 +12,6 @@
     <string name="two_vowels">The word must contain at least two vowels</string>
     <string name="correct">That\'s correct</string>
     <string name="incorrect">That\'s incorrect</string>
+    <string name="used">Word has already been used</string>
 
 </resources>
