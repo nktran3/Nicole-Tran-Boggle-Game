@@ -2,9 +2,12 @@ package com.example.nicoletran_bogglegame
 
 
 import android.os.Bundle
+import android.text.*
+import android.text.style.BackgroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.*
 import android.widget.*
+import androidx.core.content.ContextCompat
 
 class GameBoardFragment : Fragment() {
     private val selectedLetters = StringBuilder()
@@ -59,6 +62,7 @@ class GameBoardFragment : Fragment() {
             selectedLetters.clear()
             selectedButtonIds.clear()
             displayWord.text = ""
+            resetButtons()
         }
 
         submitButton.setOnClickListener{
@@ -117,6 +121,7 @@ class GameBoardFragment : Fragment() {
             selectedLetters.clear()
             selectedButtonIds.clear()
             displayWord.text = ""
+            resetButtons()
         }
     }
 
@@ -149,9 +154,14 @@ class GameBoardFragment : Fragment() {
                     if (selectedButtonIds.contains(it.id)){
                         Toast.makeText(context, R.string.letter_used, Toast.LENGTH_SHORT).show()
                     }else if (selectedButtonIds.isEmpty() || selectedButtonIds.last() in adjacentButtons[it.id]!!) {
+                        val clickedButton = ContextCompat.getDrawable(requireContext(), R.drawable.clicked_letter_button)
                         selectedLetters.append(buttonLetter)
-                        displayWord.text = selectedLetters.toString()
                         selectedButtonIds.add(it.id)
+                        it.background = clickedButton
+                        val spannable = SpannableString(selectedLetters.toString())
+                        val highlight = BackgroundColorSpan(ContextCompat.getColor(requireContext(), R.color.highlight))
+                        spannable.setSpan(highlight, 0, selectedLetters.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        displayWord.text = spannable
                     } else {
                         Toast.makeText(context, R.string.adjacent, Toast.LENGTH_SHORT).show()
                     }
@@ -200,7 +210,15 @@ class GameBoardFragment : Fragment() {
         displayWord.text = ""
         totalScore = 0
         gameCommunication.updateScore(totalScore)
+        resetButtons()
         setupGameBoard()
     }
-
+    private fun resetButtons() {
+        val defaultButton = ContextCompat.getDrawable(requireContext(), R.drawable.letter_button)
+        for (i in 1..16) {
+            val buttonId = resources.getIdentifier("button$i", "id", context?.packageName)
+            val button = view?.findViewById<Button>(buttonId)
+            button?.background = defaultButton
+        }
+    }
 }

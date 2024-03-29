@@ -15,6 +15,7 @@
         android:gravity="center"
         android:text="@string/prompt"
         android:textSize="25dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +26,6 @@
         android:layout_height="0dp"
         android:layout_margin="20dp"
         android:columnCount="4"
-        android:padding="10dp"
         android:rowCount="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.6"
@@ -38,21 +38,29 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_row="0"
             android:layout_rowWeight="1"
-            android:layout_column="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button3"
@@ -60,9 +68,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button4"
@@ -70,9 +83,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button5"
@@ -80,9 +98,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button6"
@@ -90,9 +113,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button7"
@@ -100,9 +128,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button8"
@@ -110,9 +143,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button9"
@@ -120,9 +158,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button10"
@@ -130,9 +173,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button11"
@@ -140,9 +188,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button12"
@@ -150,9 +203,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button13"
@@ -160,9 +218,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button14"
@@ -170,9 +233,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp"/>
 
         <Button
             android:id="@+id/button15"
@@ -180,9 +248,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/button16"
@@ -190,9 +263,14 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
+            android:background="@drawable/letter_button"
+            android:fontFamily="@font/playfair_display"
+            android:textStyle="bold"
             android:text="@string/letter_a"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="60dp"
+            android:padding="0dp"
+            android:layout_margin="5dp" />
     </GridLayout>
 
     <TextView
@@ -202,13 +280,14 @@
         android:gravity="center"
         android:text="@string/display_word"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.147" />
 
     <Button
         android:id="@+id/clear_button"
@@ -218,6 +297,11 @@
         android:text="@string/clear_button"
         android:textSize="30dp"
         android:textColor="@color/black"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submit_button"
         app:layout_constraintHorizontal_bias="0.397"
@@ -232,6 +316,11 @@
         android:text="@string/submit_button"
         android:textSize="30dp"
         android:textColor="@color/black"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/custom_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

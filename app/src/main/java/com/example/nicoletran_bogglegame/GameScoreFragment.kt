@@ -1,6 +1,8 @@
 package com.example.nicoletran_bogglegame
 
 import android.os.Bundle
+import android.text.*
+import android.text.style.UnderlineSpan
 import androidx.fragment.app.Fragment
 import android.view.*
 import android.widget.*
@@ -36,7 +38,10 @@ class GameScoreFragment : Fragment() {
     }
 
     fun displayScore(score: Int) {
-        scoreTextView.text = score.toString()
+        val scoreNumber = score.toString()
+        val spannableString = SpannableString(scoreNumber)
+        spannableString.setSpan(UnderlineSpan(), 0, scoreNumber.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        scoreTextView.text = spannableString
     }
 
 
