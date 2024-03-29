@@ -14,6 +14,25 @@ class GameBoardFragment : Fragment() {
     private lateinit var submitButton: Button
     private lateinit var gameCommunication: GameCommunication
     private var totalScore = 0
+    private val selectedButtonIds = mutableListOf<Int>()
+    private val adjacentButtons = mapOf(
+        R.id.button1 to listOf(R.id.button2, R.id.button5, R.id.button6),
+        R.id.button2 to listOf(R.id.button1, R.id.button3, R.id.button5, R.id.button6, R.id.button7),
+        R.id.button3 to listOf(R.id.button2, R.id.button4, R.id.button6, R.id.button7, R.id.button8),
+        R.id.button4 to listOf(R.id.button3, R.id.button7, R.id.button8),
+        R.id.button5 to listOf(R.id.button1, R.id.button2, R.id.button6, R.id.button9, R.id.button10),
+        R.id.button6 to listOf(R.id.button1, R.id.button2, R.id.button3, R.id.button5, R.id.button7, R.id.button9, R.id.button10, R.id.button11),
+        R.id.button7 to listOf(R.id.button2, R.id.button3, R.id.button4, R.id.button6, R.id.button8, R.id.button10, R.id.button11, R.id.button12),
+        R.id.button8 to listOf(R.id.button3, R.id.button4, R.id.button7, R.id.button11, R.id.button12),
+        R.id.button9 to listOf(R.id.button5, R.id.button6, R.id.button10, R.id.button13, R.id.button14),
+        R.id.button10 to listOf(R.id.button5, R.id.button6, R.id.button7, R.id.button9, R.id.button11, R.id.button13, R.id.button14, R.id.button15),
+        R.id.button11 to listOf(R.id.button6, R.id.button7, R.id.button8, R.id.button10, R.id.button12, R.id.button14, R.id.button15, R.id.button16),
+        R.id.button12 to listOf(R.id.button7, R.id.button8, R.id.button11, R.id.button15, R.id.button16),
+        R.id.button13 to listOf(R.id.button9, R.id.button10, R.id.button14),
+        R.id.button14 to listOf(R.id.button9, R.id.button10, R.id.button11, R.id.button13, R.id.button15),
+        R.id.button15 to listOf(R.id.button10, R.id.button11, R.id.button12, R.id.button14, R.id.button16),
+        R.id.button16 to listOf(R.id.button11, R.id.button12, R.id.button15)
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +57,7 @@ class GameBoardFragment : Fragment() {
 
         clearButton.setOnClickListener {
             selectedLetters.clear()
+            selectedButtonIds.clear()
             displayWord.text = ""
         }
 
@@ -55,12 +75,26 @@ class GameBoardFragment : Fragment() {
                 }
             }
             if (word.length < 4){
-                Toast.makeText(requireContext(), R.string.less_than_four, Toast.LENGTH_SHORT).show()
+                val score = -10
+                if (totalScore < 10){
+                    totalScore = 0
+                } else {
+                    totalScore += score
+                }
+                gameCommunication.updateScore(totalScore)
+                Toast.makeText(requireContext(), getString(R.string.less_than_four) + ", $score", Toast.LENGTH_SHORT).show()
             } else{
                 if (!atleast2Vowels){
-                    Toast.makeText(requireContext(), R.string.two_vowels, Toast.LENGTH_SHORT).show()
+                    val score = -10
+                    if (totalScore < 10){
+                        totalScore = 0
+                    } else {
+                        totalScore += score
+                    }
+                    gameCommunication.updateScore(totalScore)
+                    Toast.makeText(requireContext(), getString(R.string.two_vowels) + ", $score", Toast.LENGTH_SHORT).show()
                 } else if (word in usedWords){
-                    Toast.makeText(requireContext(), R.string.used, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), R.string.word_used, Toast.LENGTH_SHORT).show()
                 } else {
                     if (isWordInDictionary(word)){
                         usedWords.add(word)
@@ -79,8 +113,10 @@ class GameBoardFragment : Fragment() {
                         Toast.makeText(requireContext(), getString(R.string.incorrect) + ", $score", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
+            selectedLetters.clear()
+            selectedButtonIds.clear()
+            displayWord.text = ""
         }
     }
 
@@ -94,8 +130,15 @@ class GameBoardFragment : Fragment() {
                 val letter = letters[random.nextInt(letters.size)].toString()
                 it.text = letter
                 it.setOnClickListener {
-                    selectedLetters.append(letter)
-                    displayWord.text = selectedLetters.toString()
+                    if (selectedButtonIds.contains(it.id)){
+                        Toast.makeText(context, R.string.letter_used, Toast.LENGTH_SHORT).show()
+                    }else if (selectedButtonIds.isEmpty() || selectedButtonIds.last() in adjacentButtons[it.id]!!) {
+                        selectedLetters.append(letter)
+                        displayWord.text = selectedLetters.toString()
+                        selectedButtonIds.add(it.id)
+                    } else {
+                        Toast.makeText(context, R.string.adjacent, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -136,10 +179,11 @@ class GameBoardFragment : Fragment() {
 
      fun resetGame() {
         selectedLetters.clear()
+        selectedButtonIds.clear()
         usedWords.clear()
         displayWord.text = ""
         totalScore = 0
-        gameCommunication?.updateScore(totalScore)
+        gameCommunication.updateScore(totalScore)
         setupGameBoard()
     }
 
