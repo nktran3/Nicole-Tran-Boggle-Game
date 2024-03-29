@@ -1,10 +1,10 @@
 package com.example.nicoletran_bogglegame
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.*
 import android.widget.*
-
 
 class GameBoardFragment : Fragment() {
     private val selectedLetters = StringBuilder()
