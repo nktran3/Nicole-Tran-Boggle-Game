@@ -121,19 +121,35 @@ class GameBoardFragment : Fragment() {
     }
 
     private fun setupGameBoard() {
-        val letters = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
-        val random = java.util.Random()
+        val vowels = listOf('A', 'E', 'I', 'O', 'U')
+        val alphabet = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
+        val letters = mutableListOf<Char>()
+        var vowelCount = 0
+
+        while (letters.size < 16) {
+            if (letters.size >= 14 && vowelCount < 2) {
+                letters.add(vowels.random())
+                vowelCount++
+            } else {
+                val letter = alphabet.random()
+                letters.add(letter)
+                if (letter in vowels) {
+                    vowelCount++
+                }
+            }
+        }
+
         for (i in 1..16) {
             val buttonId = resources.getIdentifier("button$i", "id", context?.packageName)
             val button = view?.findViewById<Button>(buttonId)
             button?.let {
-                val letter = letters[random.nextInt(letters.size)].toString()
-                it.text = letter
+                val buttonLetter = letters[i - 1].toString()
+                it.text = buttonLetter
                 it.setOnClickListener {
                     if (selectedButtonIds.contains(it.id)){
                         Toast.makeText(context, R.string.letter_used, Toast.LENGTH_SHORT).show()
                     }else if (selectedButtonIds.isEmpty() || selectedButtonIds.last() in adjacentButtons[it.id]!!) {
-                        selectedLetters.append(letter)
+                        selectedLetters.append(buttonLetter)
                         displayWord.text = selectedLetters.toString()
                         selectedButtonIds.add(it.id)
                     } else {
