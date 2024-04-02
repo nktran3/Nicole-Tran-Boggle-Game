@@ -7,6 +7,12 @@ import android.os.Bundle
 import java.util.*
 import kotlin.math.*
 
+// citation: https://www.geeksforgeeks.org/how-to-communicate-between-fragments-in-android/
+// citation: https://www.youtube.com/watch?v=rpzuEN8UhUQ
+// citation: https://medium.com/@myofficework000/fragment-communications-847ab5772674#:~:text=Fragment%20communication%20using%20interfaces%20establishes,exchange%20data%20and%20events%20seamlessly.
+// citation: https://stackoverflow.com/questions/55182578/how-to-read-plain-text-file-in-kotlin
+// citation: chatgpt
+
 class MainActivity : AppCompatActivity(), GameCommunication {
     private var sensorManager: SensorManager? = null
     private var acceleration = 0f
@@ -16,6 +22,7 @@ class MainActivity : AppCompatActivity(), GameCommunication {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Extra Credit
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         Objects.requireNonNull(sensorManager)!!

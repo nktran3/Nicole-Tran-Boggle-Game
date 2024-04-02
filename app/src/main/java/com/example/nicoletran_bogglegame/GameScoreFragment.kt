@@ -11,6 +11,7 @@ class GameScoreFragment : Fragment() {
     private lateinit var scoreTextView: TextView
     private lateinit var newGameButton: Button
     private lateinit var gameCommunication: GameCommunication
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,6 +32,7 @@ class GameScoreFragment : Fragment() {
         scoreTextView = view.findViewById(R.id.score_number)
         newGameButton = view.findViewById(R.id.new_game_button)
 
+        // set onclick listener for new game button, recieve new game function from interface
         newGameButton.setOnClickListener{
             gameCommunication.resetGame()
         }
@@ -38,6 +40,7 @@ class GameScoreFragment : Fragment() {
     }
 
     fun displayScore(score: Int) {
+        // add underline to the score number and display it
         val scoreNumber = score.toString()
         val spannableString = SpannableString(scoreNumber)
         spannableString.setSpan(UnderlineSpan(), 0, scoreNumber.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

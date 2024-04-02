@@ -58,6 +58,7 @@ class GameBoardFragment : Fragment() {
         clearButton = view.findViewById(R.id.clear_button)
         submitButton = view.findViewById(R.id.submit_button)
 
+        // set on click listener for clear button
         clearButton.setOnClickListener {
             selectedLetters.clear()
             selectedButtonIds.clear()
@@ -65,11 +66,14 @@ class GameBoardFragment : Fragment() {
             resetButtons()
         }
 
+        // set on click listener for submit button
         submitButton.setOnClickListener{
             val word = selectedLetters.toString()
             val vowels = "AEIOU"
             var vowelCount = 0
             var atleast2Vowels = false
+
+            // iterate through word and count vowels
             for (char in word) {
                 if (char in vowels){
                     vowelCount++
@@ -79,6 +83,7 @@ class GameBoardFragment : Fragment() {
                 }
             }
             if (word.length < 4){
+                // check if word has at least 4 chars
                 val score = -10
                 if (totalScore < 10){
                     totalScore = 0
@@ -88,6 +93,7 @@ class GameBoardFragment : Fragment() {
                 gameCommunication.updateScore(totalScore)
                 Toast.makeText(requireContext(), getString(R.string.less_than_four) + ", $score", Toast.LENGTH_SHORT).show()
             } else{
+                // check that the word has at least 2 vowels
                 if (!atleast2Vowels){
                     val score = -10
                     if (totalScore < 10){
@@ -98,9 +104,11 @@ class GameBoardFragment : Fragment() {
                     gameCommunication.updateScore(totalScore)
                     Toast.makeText(requireContext(), getString(R.string.two_vowels) + ", $score", Toast.LENGTH_SHORT).show()
                 } else if (word in usedWords){
+                    // check if word was used already
                     Toast.makeText(requireContext(), R.string.word_used, Toast.LENGTH_SHORT).show()
                 } else {
                     if (isWordInDictionary(word)){
+                        // check if word is in the dictionary
                         usedWords.add(word)
                         val score = calculateScore(word)
                         totalScore += score
@@ -125,6 +133,7 @@ class GameBoardFragment : Fragment() {
         }
     }
 
+    // set up game board -> new letters every game, contains at least two vowels
     private fun setupGameBoard() {
         val vowels = listOf('A', 'E', 'I', 'O', 'U')
         val alphabet = listOf('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
@@ -150,6 +159,8 @@ class GameBoardFragment : Fragment() {
             button?.let {
                 val buttonLetter = letters[i - 1].toString()
                 it.text = buttonLetter
+
+                // set letter button on click, check if has not been used and is adjacent, grey out letters if letter is valid
                 it.setOnClickListener {
                     if (selectedButtonIds.contains(it.id)){
                         Toast.makeText(context, R.string.letter_used, Toast.LENGTH_SHORT).show()
@@ -170,6 +181,7 @@ class GameBoardFragment : Fragment() {
         }
     }
 
+    // check if the word is in the dictionary
     private fun isWordInDictionary(word:String): Boolean {
         requireContext().assets.open("words.txt").bufferedReader().useLines { lines ->
             lines.forEach { line ->
@@ -181,6 +193,7 @@ class GameBoardFragment : Fragment() {
         return false
     }
 
+    // calculate score
     private fun calculateScore(word: String): Int {
         var score = 0
         val vowels = "AEIOU"
@@ -203,6 +216,7 @@ class GameBoardFragment : Fragment() {
         return score
     }
 
+    // reset game
      fun resetGame() {
         selectedLetters.clear()
         selectedButtonIds.clear()
@@ -213,6 +227,8 @@ class GameBoardFragment : Fragment() {
         resetButtons()
         setupGameBoard()
     }
+
+    // reset greyed out buttons
     private fun resetButtons() {
         val defaultButton = ContextCompat.getDrawable(requireContext(), R.drawable.letter_button)
         for (i in 1..16) {
